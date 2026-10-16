@@ -5,10 +5,11 @@
  */
 const EMPRESA_CONFIG = {
   nombre: "Petroindustrias G&V S.A.S.",
-  eslogan: "[ESLOGAN PENDIENTE]",
+  eslogan: "Soluciones integrales y suministros para la industria petrolera y de la construcción",
   ciudad: "Neiva, Huila, Colombia",
   direccion: "Carrera 31 A # 23 A Sur 04, Barrio Encenillo",
   horario: "Lunes a viernes: 8:00 a. m. a 6:00 p. m. Sábados: 8:00 a. m. a 12:00 m.",
+  email: "petroindustriasgyv@gmail.com",
   urlGoogleMaps: "https://www.google.com/maps/search/?api=1&query=petroindustrias+gyv",
   
   // Índice del contacto principal dentro del arreglo 'contactos' (0 = Neyla Alejandra)
@@ -151,6 +152,19 @@ function inicializarDatos() {
   const contactoDatoCiudad = document.getElementById("contacto-dato-ciudad");
   if (contactoDatoCiudad && EMPRESA_CONFIG.ciudad) {
     contactoDatoCiudad.textContent = EMPRESA_CONFIG.ciudad;
+  }
+
+  // Actualizar enlaces de correo electrónico
+  const contactoEmail = document.getElementById("contacto-email");
+  if (contactoEmail && EMPRESA_CONFIG.email) {
+    contactoEmail.href = `mailto:${EMPRESA_CONFIG.email}`;
+    contactoEmail.textContent = EMPRESA_CONFIG.email;
+  }
+
+  const footerEmail = document.getElementById("footer-email");
+  if (footerEmail && EMPRESA_CONFIG.email) {
+    footerEmail.href = `mailto:${EMPRESA_CONFIG.email}`;
+    footerEmail.textContent = EMPRESA_CONFIG.email;
   }
 
   const heroEnlaceUbicacion = document.getElementById("hero-enlace-ubicacion");
