@@ -1,0 +1,1274 @@
+/* ==========================================================================
+   VARIABLES Y CONFIGURACIÓN BASE
+   Paleta oficial de Petroindustrias G&V S.A.S.
+   ========================================================================== */
+:root {
+  --color-primario: #1F5A94;      /* Azul institucional letras G&V */
+  --color-secundario: #1E3A5F;    /* Azul profundo de la llama */
+  --color-acento: #7B9AC9;        /* Azul claro reflejos (solo fondos oscuros / detalles) */
+  --color-fondo: #FFFFFF;
+  --color-fondo-alt: #F2F5F9;     /* Tono claro del primario para secciones alternas */
+  --color-texto: #111111;         /* Negro gota y texto principal */
+  --color-blanco: #FFFFFF;
+  
+  /* Tipografías */
+  --fuente-titulos: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --fuente-cuerpo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Elevación y bordes */
+  --radio-suave: 12px;
+  --radio-tarjeta: 16px;
+  --sombra-tarjeta: 0 4px 20px rgba(30, 58, 95, 0.07);
+  --sombra-elevada: 0 10px 28px rgba(30, 58, 95, 0.12);
+  --transicion-base: 0.25s ease-in-out;
+  
+  /* Header */
+  --alto-header: 72px;
+
+  /* 
+   * FOTO FUTURA EN HERO:
+   * Para activar una fotografía real con capa azul semitransparente encima:
+   * 1. Coloca tu imagen en assets/hero-bg.jpg
+   * 2. Reemplaza 'none' por: url('assets/hero-bg.jpg')
+   * La capa de gradiente azul institucional (--color-secundario a --color-primario)
+   * se mantendrá mezclada con la imagen sin romper los textos ni el contraste.
+   */
+  --hero-imagen: none;
+}
+
+/* Reset y Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   ACCESIBILIDAD Y FOCO (Ajuste #3: primario sobre claro, acento sobre oscuro)
+   ========================================================================== */
+:focus-visible {
+  outline: 3px solid var(--color-primario);
+  outline-offset: 3px;
+}
+
+/* En fondos oscuros (Hero, Footer, Botones oscuros), usar acento */
+.fondo-oscuro :focus-visible,
+.btn-primary:focus-visible,
+.hero :focus-visible,
+.footer-principal :focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 1rem;
+  background: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 0.75rem 1.25rem;
+  z-index: 9999;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: top var(--transicion-base);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA Y CONTENEDORES
+   ========================================================================== */
+h1, h2, h3, h4 {
+  font-family: var(--fuente-titulos);
+  color: var(--color-secundario);
+  line-height: 1.2;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.seccion {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+}
+
+.seccion-alt {
+  background-color: var(--color-fondo-alt);
+}
+
+.seccion-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3rem auto;
+}
+
+.seccion-titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  position: relative;
+  display: inline-block;
+}
+
+.seccion-titulo::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: var(--color-primario);
+  margin: 0.6rem auto 0 auto;
+  border-radius: 2px;
+}
+
+/* Texto secundario con opacidad 0.75 derivada de --color-texto (Ajuste #4) */
+.texto-secundario,
+.seccion-subtitulo,
+.categoria-desc,
+.sobre-descripcion {
+  color: rgba(17, 17, 17, 0.75);
+}
+
+/* ==========================================================================
+   BOTONES (Mínimo 44px de alto táctil)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.65rem 1.35rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transicion-base);
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.btn-primary:hover {
+  background-color: #174470;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #FFFFFF;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1EBE5D;
+}
+
+.btn-blanco {
+  background-color: var(--color-blanco);
+  color: var(--color-primario);
+}
+
+.btn-blanco:hover {
+  background-color: var(--color-fondo-alt);
+}
+
+.btn-blanco-outline {
+  background-color: transparent;
+  border-color: var(--color-blanco);
+  color: var(--color-blanco);
+}
+
+.btn-blanco-outline:hover {
+  background-color: var(--color-blanco);
+  color: var(--color-secundario);
+}
+
+/* Marcadores pendientes visibles */
+.badge-marcador {
+  display: inline-block;
+  background-color: rgba(31, 90, 148, 0.1);
+  color: var(--color-primario);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  border: 1px dashed var(--color-primario);
+}
+
+/* ==========================================================================
+   HEADER FIJO
+   ========================================================================== */
+.header-principal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--alto-header);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.header-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.marca-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-logo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  max-width: 140px;
+}
+
+.header-logo-card img {
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.nav-menu {
+  display: none;
+}
+
+.nav-lista {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-texto);
+  transition: color var(--transicion-base);
+  position: relative;
+  padding: 0.35rem 0;
+}
+
+.nav-link:hover {
+  color: var(--color-primario);
+}
+
+.header-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Botón menú hamburguesa */
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2.5px;
+  background-color: var(--color-secundario);
+  border-radius: 2px;
+  transition: all var(--transicion-base);
+}
+
+/* Estado abierto hamburguesa */
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   Degradado de secundario a primario + gota/llama sutil + tarjeta blanca para logo
+   ========================================================================== */
+/* ==========================================================================
+   HERO SECTION (AVANZADO, MULTICAPA Y RESPONSIVE)
+   Fondo en capas, layout 2 columnas, animaciones y tarjetas de datos rápidos
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: calc(var(--alto-header) + 2rem);
+  padding-bottom: 4.5rem;
+  background-color: var(--color-secundario);
+  /* Capa base con degradado diagonal y soporte para imagen futura */
+  background-image: 
+    linear-gradient(135deg, rgba(30, 58, 95, 0.94) 0%, rgba(31, 90, 148, 0.92) 100%),
+    var(--hero-imagen);
+  background-size: cover;
+  background-position: center;
+  color: var(--color-blanco);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Capas decorativas de fondo (pointer-events: none) */
+.hero-bg-capas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 1. Cuadrícula técnica de líneas finas en blanco con opacidad 0.06 */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 2. Círculos grandes desenfocados en --color-acento (opacidad 0.25 - 0.35) */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  background: var(--color-acento);
+  pointer-events: none;
+}
+
+.hero-orb-1 {
+  width: 320px;
+  height: 320px;
+  top: 10%;
+  left: -5%;
+  opacity: 0.30;
+  animation: orbitarSuave 10s ease-in-out infinite alternate;
+}
+
+.hero-orb-2 {
+  width: 380px;
+  height: 380px;
+  bottom: 15%;
+  right: -5%;
+  opacity: 0.28;
+  animation: orbitarSuave 12s ease-in-out infinite alternate-reverse;
+}
+
+.hero-orb-3 {
+  width: 220px;
+  height: 220px;
+  top: 40%;
+  right: 35%;
+  opacity: 0.25;
+  animation: orbitarSuave 8s ease-in-out infinite alternate;
+}
+
+/* 3. Silueta decorativa de gota/llama en SVG sutil (opacidad 0.10) */
+.hero-silueta-svg {
+  position: absolute;
+  right: 2%;
+  top: 15%;
+  width: 440px;
+  height: 520px;
+  opacity: 0.10;
+  pointer-events: none;
+  animation: flotarLento 11s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+/* Contenedor y Layout 2 columnas */
+.hero-contenedor {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 2.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.hero-col-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 650px;
+}
+
+.hero-col-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Tarjeta blanca para el logo: formato CUADRANGULAR (1:1), destacada con marco sutil, resplandor y sombra profunda */
+.hero-logo-tarjeta {
+  background-color: #FFFFFF;
+  padding: 1.5rem;
+  border-radius: 24px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 290px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 35px rgba(123, 154, 201, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(2deg);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  cursor: default;
+}
+
+.hero-logo-tarjeta:hover {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 0 45px rgba(123, 154, 201, 0.45);
+}
+
+.hero-logo-tarjeta img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.hero-titulo {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-blanco);
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.hero-eslogan-wrap {
+  margin-bottom: 2rem;
+}
+
+.hero-eslogan {
+  display: inline-block;
+  font-size: 1.15rem;
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.55rem 1.35rem;
+  border-radius: 30px;
+  border: 1px dashed rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(4px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hero-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Efectos visuales de botones Hero */
+/* Brillo reflectivo que cruza al hacer hover */
+.btn-brillo {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-brillo::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: all 0.65s ease;
+  pointer-events: none;
+}
+
+.btn-brillo:hover::after {
+  left: 130%;
+}
+
+/* Pulso suave para el botón de WhatsApp en hero */
+.btn-pulso {
+  position: relative;
+}
+
+.btn-pulso::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 10px;
+  border: 2px solid #25D366;
+  opacity: 0.8;
+  animation: pulsoAnillo 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+/* Flecha animada de scroll hacia #que-hacemos */
+.hero-scroll-btn {
+  position: relative;
+  z-index: 3;
+  margin: 1.25rem auto 0.5rem auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--color-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transicion-base), transform var(--transicion-base);
+  animation: rebotarFlecha 2s ease-in-out infinite;
+}
+
+.hero-scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+/* Divisor inferior ondulado en SVG al fondo del Hero (sin franjas residuales) */
+.hero-divisor-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 0;
+}
+
+.hero-divisor-svg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   4. TARJETAS DE DATOS RÁPIDOS SUPERPUESTAS
+   Se ubican en la entrada de la sección "Qué hacemos", conectando naturalmente con el fondo blanco
+   ========================================================================== */
+.seccion-con-datos-rapidos {
+  padding-top: 0;
+}
+
+.hero-datos-rapidos-contenedor {
+  position: relative;
+  z-index: 5;
+  transform: translateY(-50%);
+  margin-bottom: -1rem;
+}
+
+.hero-datos-rapidos-grid {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.5rem 0.25rem 1rem 0.25rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.hero-datos-rapidos-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.tarjeta-dato-rapido {
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  background: var(--color-blanco);
+  border-radius: var(--radio-suave);
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.14);
+  border: 1px solid rgba(31, 90, 148, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform var(--transicion-base), box-shadow var(--transicion-base);
+}
+
+.tarjeta-dato-rapido:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(30, 58, 95, 0.18);
+}
+
+.dato-rapido-icono {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: var(--color-fondo-alt);
+  color: var(--color-primario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dato-rapido-contenido {
+  display: flex;
+  flex-direction: column;
+}
+
+.dato-rapido-etiqueta {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(17, 17, 17, 0.65);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.dato-rapido-valor {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-secundario);
+  line-height: 1.35;
+}
+
+.dato-rapido-subtexto {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(17, 17, 17, 0.7);
+  margin-top: 0.15rem;
+}
+
+.enlace-tel-rapido {
+  color: var(--color-primario);
+  transition: color var(--transicion-base);
+}
+
+.enlace-tel-rapido:hover {
+  color: var(--color-secundario);
+  text-decoration: underline;
+}
+
+.badge-marcador-suave {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primario);
+}
+
+/* ==========================================================================
+   ANIMACIONES DE FLOTACIÓN, PULSO Y ESCALONADO
+   ========================================================================== */
+@keyframes flotarLento {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes orbitarSuave {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(18px) scale(1.08);
+  }
+}
+
+@keyframes pulsoAnillo {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes rebotarFlecha {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+
+/* Entrada escalonada de elementos Hero (+150ms) */
+.animar-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.escalon-1 {
+  animation-delay: 0.1s;
+}
+
+.escalon-2 {
+  animation-delay: 0.25s; /* +150ms */
+}
+
+.escalon-3 {
+  animation-delay: 0.40s; /* +150ms */
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN: QUÉ HACEMOS (Sin mención no verificada a hidrocarburos)
+   ========================================================================== */
+.sobre-caja {
+  background: var(--color-fondo);
+  border: 1px solid rgba(31, 90, 148, 0.12);
+  border-radius: var(--radio-tarjeta);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--sombra-tarjeta);
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.sobre-marcador {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.sobre-nota {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   SECCIÓN: QUÉ OFRECEMOS (GRILLA DE TARJETAS)
+   ========================================================================== */
+.categorias-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.tarjeta-categoria {
+  background-color: var(--color-blanco);
+  border-radius: var(--radio-tarjeta);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--sombra-tarjeta);
+  border: 1px solid rgba(31, 90, 148, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform var(--transicion-base), box-shadow var(--transicion-base);
+}
+
+.tarjeta-categoria:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-elevada);
+}
+
+.categoria-icono-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background-color: var(--color-fondo-alt);
+  color: var(--color-primario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.categoria-titulo {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-secundario);
+}
+
+/* ==========================================================================
+   SECCIÓN: CONTACTO
+   ========================================================================== */
+.contacto-grid-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.datos-locales-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.tarjeta-dato-local {
+  background: var(--color-fondo-alt);
+  border-radius: var(--radio-tarjeta);
+  padding: 1.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  border: 1px solid rgba(31, 90, 148, 0.08);
+  transition: transform var(--transicion-base), box-shadow var(--transicion-base), border-color var(--transicion-base);
+}
+
+.tarjeta-interactiva {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tarjeta-interactiva:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(30, 58, 95, 0.14);
+  border-color: var(--color-primario);
+}
+
+.badge-abrir-mapa {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-primario);
+  background: rgba(31, 90, 148, 0.1);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background var(--transicion-base), color var(--transicion-base);
+}
+
+.tarjeta-interactiva:hover .badge-abrir-mapa {
+  background: var(--color-primario);
+  color: var(--color-blanco);
+}
+
+.dato-local-icono {
+  background: var(--color-primario);
+  color: var(--color-blanco);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dato-local-info h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+/* Contactos de personas */
+.contactos-lista {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.tarjeta-contacto {
+  background: var(--color-blanco);
+  border: 1px solid rgba(31, 90, 148, 0.12);
+  border-radius: var(--radio-tarjeta);
+  padding: 1.75rem;
+  box-shadow: var(--sombra-tarjeta);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.contacto-nombre {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-secundario);
+  margin-bottom: 0.35rem;
+}
+
+.contacto-cargo {
+  margin-bottom: 0.65rem;
+}
+
+.contacto-telefono {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-primario);
+}
+
+.contacto-acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Contenedor del Mapa */
+.mapa-wrap {
+  border-radius: var(--radio-tarjeta);
+  overflow: hidden;
+  box-shadow: var(--sombra-tarjeta);
+  border: 1px solid rgba(31, 90, 148, 0.1);
+  background: var(--color-fondo-alt);
+  height: 380px;
+}
+
+.mapa-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ==========================================================================
+   FOOTER (Ajuste #2: logo en tarjeta blanca)
+   ========================================================================== */
+.footer-principal {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  padding: 4rem 0 2.5rem 0;
+  position: relative;
+}
+
+.footer-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
+}
+
+.footer-logo-tarjeta {
+  background-color: #FFFFFF;
+  padding: 1rem 1.75rem;
+  border-radius: var(--radio-suave);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 200px;
+}
+
+.footer-logo-tarjeta img {
+  max-height: 55px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-contacto-linea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  color: #FFFFFF;
+}
+
+.footer-tel-link {
+  color: var(--color-blanco);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer-tel-link:hover {
+  color: var(--color-acento);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1.5rem;
+  width: 100%;
+}
+
+/* Fallback de logo en texto si no cargara */
+.logo-fallback-text {
+  font-family: var(--fuente-titulos);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primario);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE WHATSAPP
+   ========================================================================== */
+.btn-flotante-wa {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);
+  z-index: 990;
+  transition: transform var(--transicion-base), box-shadow var(--transicion-base);
+}
+
+.btn-flotante-wa:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.55);
+}
+
+/* ==========================================================================
+   ANIMACIONES DE SCROLL Y ACCESIBILIDAD REDUCED MOTION
+   ========================================================================== */
+.animar-revelar {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animar-revelar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animar-revelar,
+  .animar-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .hero-orb-1,
+  .hero-orb-2,
+  .hero-orb-3,
+  .hero-silueta-svg,
+  .hero-scroll-btn,
+  .btn-pulso::before,
+  .btn-brillo::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero-logo-tarjeta {
+    transform: none !important;
+  }
+  .btn, .tarjeta-categoria, .btn-flotante-wa, .tarjeta-dato-rapido {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET Y ESCRITORIO)
+   ========================================================================== */
+
+/* Tablets (>= 768px) */
+@media (min-width: 768px) {
+  .hero-titulo {
+    font-size: 3rem;
+  }
+  
+  .hero-acciones {
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: none;
+  }
+  
+  .tarjeta-dato-rapido {
+    flex: 1 1 calc(33.333% - 1rem);
+  }
+
+  .hero-datos-rapidos-grid {
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+  
+  .categorias-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .datos-locales-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .contactos-lista {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .tarjeta-contacto {
+    padding: 1.5rem;
+  }
+  
+  .contacto-acciones {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Desktop (>= 1024px) */
+@media (min-width: 1024px) {
+  .menu-toggle {
+    display: none;
+  }
+  
+  .nav-menu {
+    display: block;
+  }
+
+  /* Layout Hero en 2 columnas en escritorio */
+  .hero-contenedor {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.5rem;
+    text-align: left;
+  }
+
+  .hero-col-texto {
+    align-items: flex-start;
+    text-align: left;
+    flex: 1.2;
+  }
+
+  .hero-col-logo {
+    flex: 0.9;
+    justify-content: flex-end;
+  }
+
+  .hero-logo-tarjeta {
+    max-width: 360px;
+    padding: 2rem;
+  }
+
+  .hero-titulo {
+    font-size: 3.4rem;
+  }
+
+  .categorias-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .tarjeta-contacto .contacto-acciones {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Menú móvil desplegado */
+@media (max-width: 1023px) {
+  .nav-menu-abierto {
+    display: block;
+    position: fixed;
+    top: var(--alto-header);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--alto-header));
+    background-color: var(--color-blanco);
+    padding: 2.5rem 1.5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+  
+  .nav-menu-abierto .nav-lista {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+  
+  .nav-menu-abierto .nav-link {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
